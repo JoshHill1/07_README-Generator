@@ -1,16 +1,13 @@
-// TODO: Include packages needed for this application
+// Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer')
 
-// TODO: Create an array of questions for user input
-const questions = [];
-
-// TODO: Create a function to write README file
+// Create a function to write README file
 function writeToFile(fileName, data) {
   fs.writeFile(fileName, data, () => {})
 }
 
-// TODO: Create a function to initialize app
+// Create a function to initialize app
 function init() {
   inquirer.prompt([
     {
@@ -42,14 +39,14 @@ function init() {
     {
       type: 'input',
       name: 'comandRun',
-      message: 'What command should be run to install dependencies'
-      // Shouls have a default that prints "(npm i)" so that when we press enter, it outputs "npm i"
+      message: 'What command should be run to install dependencies',
+      default: 'node i'
     },
     {
       type: 'input',
       name: 'testRun',
-      message: 'What command should be run to to run tests?'
-      // Shouls have a default that prints "(npm test)"  then the user can put for example: npm testmenow; and then it outputs "npm testmenow"
+      message: 'What command should be run to to run tests?',
+      default: 'node test'
     } ,
     {
       type: 'input',
@@ -72,7 +69,7 @@ function init() {
       licenseBadge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)'
       break;
     case 'GLP 3.0':
-      // licenseBadge = ''
+      licenseBadge = '[![License: MIT](https://img.shields.io/badge/License-GLP-yellow.svg)](https://opensource.org/licenses/gpl)'
       break;
     case 'BSD 3':
       licenseBadge = '[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)'
@@ -80,14 +77,11 @@ function init() {
     case 'None':
       break;
   }
-  //                                                                      ${user}                                                                                           fix this if needed                             ${answers.needToKnowUsage}                                                                        ${needToKnowContribute}                                  ${testRun}
-  const text = `# ${answers.title} \n${answers.desc} \nLike my work? go to  to see more! \n${licenseBadge} \n## Installation \nTo install the necessary dependencies, run this command:\n${answers.comandRun} \n## Usage \n \n## License \nThis project is licensed under the ${answers.license} license. \n## Contributing \n \n## Test \nTo run tests, run the following command: \n \n## Questions \nIf you have any questions about the repo, open an issue or contact me directly at ${answers.email}.
+  const text = `# ${answers.title} \n${answers.desc} \nLike my work? go to ${answers.user} to see more! \n${licenseBadge} \n## Installation \nTo install the necessary dependencies, run this command:\n${answers.comandRun} \n## Usage \n${answers.needToKnowUsage} \n## License \nThis project is licensed under the ${answers.license} license. \n## Contributing \n${answers.needToKnowContribute} \n## Test \nTo run tests, run the following command: \n${answers.testRun} \n## Questions \nIf you have any questions about the repo, open an issue or contact me directly at ${answers.email}.
 `
   
     writeToFile('New-README.md', text);
   })
-
-
 }
 
 // Function call to initialize app
